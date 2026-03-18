@@ -1,0 +1,62 @@
+site_name: pre-commit-glassworm
+site_description: Detect GlassWorm-style invisible Unicode attacks in source code
+site_url: https://solaegis.github.io/pre-commit-glassworm/
+repo_url: https://github.com/solaegis/pre-commit-glassworm
+repo_name: solaegis/pre-commit-glassworm
+edit_uri: edit/main/docs/
+copyright: MIT License
+
+theme:
+  name: material
+  language: en
+  palette:
+    - scheme: default
+      primary: teal
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: teal
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: installation.md
+    - Quick Start: usage.md
+  - Reference:
+    - What It Detects: detection.md
+    - Configuration: configuration.md
+    - CLI Reference: cli.md
+  - CI & Automation:
+    - GitHub Actions: ci.md
+  - Contributing:
+    - Development: development.md
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - admonition
+  - attr_list

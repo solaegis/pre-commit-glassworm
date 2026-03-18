@@ -1,0 +1,84 @@
+version: "3"
+
+tasks:
+  default:
+    desc: List available tasks
+    cmds:
+      - task --list
+
+  bump:
+    desc: Bump semantic version using commitizen (reads last commit to determine bump type)
+    silent: true
+    cmds:
+      - uv run cz bump
+    sources:
+      - pyproject.toml
+      - CHANGELOG.md
+
+  bump:patch:
+    desc: Force patch bump (0.0.X)
+    silent: true
+    cmds:
+      - uv run cz bump --increment PATCH
+
+  bump:minor:
+    desc: Force minor bump (0.X.0)
+    silent: true
+    cmds:
+      - uv run cz bump --increment MINOR
+
+  bump:major:
+    desc: Force major bump (X.0.0)
+    silent: true
+    cmds:
+      - uv run cz bump --increment MAJOR
+
+  test:
+    desc: Run tests
+    silent: true
+    cmds:
+      - uv run pytest -v
+
+  lint:
+    desc: Lint with ruff
+    silent: true
+    cmds:
+      - uv run ruff check src/ tests/
+
+  format:
+    desc: Format with ruff
+    silent: true
+    cmds:
+      - uv run ruff format src/ tests/
+
+  docs:
+    desc: Serve MkDocs site locally (http://localhost:8000)
+    silent: true
+    cmds:
+      - uv run mkdocs serve
+
+  docs:build:
+    desc: Build MkDocs site to site/
+    silent: true
+    cmds:
+      - uv run mkdocs build
+
+  build:
+    desc: Build sdist and wheel to dist/
+    silent: true
+    cmds:
+      - uv build
+    sources:
+      - pyproject.toml
+      - src/**/*.py
+
+  publish:
+    desc: Build and publish to PyPI (requires UV_PUBLISH_TOKEN in .env or env)
+    silent: true
+    dotenv: [".env"]
+    cmds:
+      - uv build
+      - uv publish
+    sources:
+      - pyproject.toml
+      - src/**/*.py

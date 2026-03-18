@@ -1,0 +1,15 @@
+repos:
+  - repo: local
+    hooks:
+      - id: glassworm
+        name: Detect GlassWorm invisible Unicode attacks
+        entry: glassworm
+        language: python
+        pass_filenames: true
+        types_or: [python, javascript, jsx, tsx, json, yaml, toml, markdown, text, shell]
+
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.10.0
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]

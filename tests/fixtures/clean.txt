@@ -1,0 +1,3 @@
+This file has only safe ASCII and normal Unicode.
+English: Hello
+Accented: café, naïve, Zürich

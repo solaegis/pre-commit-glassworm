@@ -1,0 +1,7 @@
+-   id: glassworm
+    name: Detect GlassWorm invisible Unicode attacks
+    description: Catches variation selectors, bidi controls, zero-width chars (CVE-2021-42574, GlassWorm)
+    entry: glassworm
+    language: python
+    pass_filenames: true
+    types_or: [python, javascript, jsx, tsx, json, yaml, toml, markdown, text, shell]
