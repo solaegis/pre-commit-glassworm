@@ -4,7 +4,7 @@ build-backend = "uv_build"
 
 [project]
 name = "pre-commit-glassworm"
-version = "0.1.0"
+version = "0.1.1"
 description = "Pre-commit hook to detect GlassWorm-style invisible Unicode attacks (variation selectors, bidi controls, zero-width chars)"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -83,7 +83,7 @@ include = ["*.py", "*.js", "*.ts", "*.jsx", "*.tsx", "*.json", "*.yaml", "*.yml"
 exclude = ["vendor/", "node_modules/", ".venv/", "*.min.js", "fixtures/"]
 
 [tool.commitizen]
-version = "0.1.0"
+version = "0.1.1"
 name = "cz_conventional_commits"
 tag_format = "v$version"
 version_files = [

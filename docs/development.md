@@ -23,8 +23,16 @@ pre-commit install --hook-type commit-msg
 | `task bump:patch` | Force patch bump |
 | `task bump:minor` | Force minor bump |
 | `task bump:major` | Force major bump |
+| `task tag` | Create annotated git tag from pyproject.toml version |
 | `task build` | Build sdist + wheel to `dist/` |
 | `task publish` | Build + publish to PyPI |
+| `task release:check` | Lint, format check, and test (run before release) |
+| `task release` | Release (infer bump) — check, bump, tag, publish |
+| `task release:patch` | Release patch (0.0.X) |
+| `task release:minor` | Release minor (0.X.0) |
+| `task release:major` | Release major (X.0.0) |
+| `task release:push` | Push commits and tags to origin |
+| `task release:gh` | Create GitHub release (requires gh CLI) |
 
 ## Project structure
 
@@ -87,3 +95,31 @@ task bump:patch    # 0.0.X
 task bump:minor    # 0.X.0
 task bump:major    # X.0.0
 ```
+
+## Release process
+
+Full flow: **lint → test → bump (commit) → tag → publish → push → GitHub release**.
+
+1. **Commit your work** with conventional commits (`fix:`, `feat:`, etc.).
+2. **Run a release task** (runs lint, format check, test, bump, tag, publish):
+
+   ```bash
+   task release          # infer bump from commits since last tag
+   task release:patch    # force 0.0.X
+   task release:minor    # force 0.X.0
+   task release:major    # force X.0.0
+   ```
+
+3. **Push** commits and tags:
+
+   ```bash
+   task release:push
+   ```
+
+4. **Create GitHub release** (optional):
+
+   ```bash
+   task release:gh       # requires gh CLI; uses --generate-notes
+   ```
+
+**Prerequisites**: `UV_PUBLISH_TOKEN` in `.env` for PyPI; `gh auth login` for GitHub releases.

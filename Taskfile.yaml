@@ -33,6 +33,16 @@ tasks:
     cmds:
       - uv run cz bump --increment MAJOR
 
+  tag:
+    desc: Create annotated git tag from pyproject.toml version (vX.Y.Z)
+    silent: true
+    cmds:
+      - |
+        VERSION=$(grep -m 1 '^version = ' pyproject.toml | sed 's/.*"\([^"]*\)".*/\1/')
+        git tag -a "v${VERSION}" -m "Release v${VERSION}"
+    sources:
+      - pyproject.toml
+
   test:
     desc: Run tests
     silent: true
@@ -50,6 +60,64 @@ tasks:
     silent: true
     cmds:
       - uv run ruff format src/ tests/
+
+  format:check:
+    desc: Check formatting without modifying files
+    silent: true
+    cmds:
+      - uv run ruff format --check src/ tests/
+
+  release:check:
+    desc: Run lint, format check, and tests (run before release)
+    cmds:
+      - task: lint
+      - task: format:check
+      - task: test
+
+  release:
+    desc: Release (infer bump from conventional commits) — check, bump, tag, publish
+    cmds:
+      - task: release:check
+      - task: bump
+      - task: tag
+      - task: publish
+
+  release:patch:
+    desc: Release patch (0.0.X) — check, bump, tag, publish
+    cmds:
+      - task: release:check
+      - task: bump:patch
+      - task: tag
+      - task: publish
+
+  release:minor:
+    desc: Release minor (0.X.0) — check, bump, tag, publish
+    cmds:
+      - task: release:check
+      - task: bump:minor
+      - task: tag
+      - task: publish
+
+  release:major:
+    desc: Release major (X.0.0) — check, bump, tag, publish
+    cmds:
+      - task: release:check
+      - task: bump:major
+      - task: tag
+      - task: publish
+
+  release:push:
+    desc: Push commits and tags to origin (run after release:X)
+    cmds:
+      - git push
+      - git push --tags
+
+  release:gh:
+    desc: Create GitHub release from current tag (requires gh CLI; run after release:push)
+    cmds:
+      - |
+        VERSION=$(grep -m 1 '^version = ' pyproject.toml | sed 's/.*"\([^"]*\)".*/\1/')
+        gh release create "v${VERSION}" --generate-notes
 
   docs:
     desc: Serve MkDocs site locally (http://localhost:8000)
