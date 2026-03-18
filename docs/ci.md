@@ -1,12 +1,14 @@
 # CI Integration
 
-## pre-commit in CI
+## pre-commit / prek in CI
 
 Run the hook on the entire repo in CI:
 
 ```bash
 pre-commit run --all-files
 ```
+
+If you use [prek](https://prek.j178.dev/) instead of pre-commit, use `prek run --all-files` instead. Both tools use the same configuration.
 
 This runs every configured hook (including glassworm) on all tracked files. Use it in your GitHub Actions, GitLab CI, or other pipelines.
 

@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/solaegis/pre-commit-glassworm/actions/workflows/ci.yaml/badge.svg)](https://github.com/solaegis/pre-commit-glassworm/actions/workflows/ci.yaml)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
+[![prek](https://img.shields.io/badge/prek-compatible-brightgreen)](https://prek.j178.dev/)
 [![PyPI](https://img.shields.io/pypi/v/pre-commit-glassworm)](https://pypi.org/project/pre-commit-glassworm/)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -37,6 +38,19 @@ Then:
 ```bash
 pre-commit install
 ```
+
+### Using glassworm with prek
+
+If you prefer using [prek](https://prek.j178.dev/) instead of pre-commit, you can define a `prek.toml` file:
+
+```toml
+[[repos]]
+repo = "https://github.com/solaegis/pre-commit-glassworm"
+rev = "v0.1.0"  # pin to tag for reproducible installs
+hooks = [{ id = "glassworm" }]
+```
+
+Then run `prek install`. Your existing `.pre-commit-config.yaml` also works with prek unchanged.
 
 ### Standalone
 

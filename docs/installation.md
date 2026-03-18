@@ -28,6 +28,19 @@ Test the hook on your repo without installing:
 pre-commit try-repo . glassworm --all-files
 ```
 
+### Using prek
+
+If you prefer [prek](https://prek.j178.dev/) instead of pre-commit, define a `prek.toml` file:
+
+```toml
+[[repos]]
+repo = "https://github.com/solaegis/pre-commit-glassworm"
+rev = "v0.1.0"  # pin to tag for reproducible installs
+hooks = [{ id = "glassworm" }]
+```
+
+Then run `prek install`. Your existing `.pre-commit-config.yaml` also works with prek unchanged (no config change needed).
+
 ## Option 2: Standalone CLI
 
 Install with [uv](https://docs.astral.sh/uv/):
@@ -65,4 +78,4 @@ uv add --dev pre-commit-glassworm
 ## Requirements
 
 - Python 3.11+
-- [pre-commit](https://pre-commit.com/) (if using the hook)
+- [pre-commit](https://pre-commit.com/) or [prek](https://prek.j178.dev/) (if using the hook)

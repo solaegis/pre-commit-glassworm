@@ -2,8 +2,8 @@
 
 ## Pre-commit workflow
 
-1. Add the hook to `.pre-commit-config.yaml` (see [Installation](installation.md)).
-2. Run `pre-commit install`.
+1. Add the hook to `.pre-commit-config.yaml` or `prek.toml` (see [Installation](installation.md)).
+2. Run `pre-commit install` or `prek install`.
 3. Commit as usual. The hook runs on staged files automatically.
 
 If dangerous Unicode is found, the commit is blocked and findings are printed:
